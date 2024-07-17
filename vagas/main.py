@@ -24,9 +24,11 @@ def processa_frame(img):
     Processa a imagem para destacar as áreas de interesse.
     """
     img_cinza = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    
     img_threshold = cv2.adaptiveThreshold(img_cinza, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 25, 16)
     img_blur = cv2.medianBlur(img_threshold, 5)
     kernel = np.ones((3, 3), np.int8)
+
     img_dil = cv2.dilate(img_blur, kernel)
     return [img_dil, img_cinza]
 
